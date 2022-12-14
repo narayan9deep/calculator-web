@@ -5,6 +5,8 @@ var string = "";
 var primaryText = document.querySelector(".primary-text");
 var secondaryText = document.querySelector(".secondary-text");
 
+//boolean to check if decimal already present or not in the current number input
+var decimalPresent = false;
 
 //array of symbols
 var symbols = ["+","/","-","*"]; //(this is for later checking that no two symbols are input consecutively)
@@ -48,6 +50,25 @@ Array.from(buttons).forEach(function(button){
                 //insert new symbol at the end of the string
                 string = string + e.target.innerText;
             }
+
+            //logic to ensure decimal button is disabled if there’s already one in the number
+            if(e.target.innerText == ".")
+            {
+                //if decimal is already present
+                if(decimalPresent!=false)
+                {
+                    //remove the second decimal from the string
+                    string = string.toString().slice(0,-1);
+                }
+                //make decimalPresent = true, to show that decimal already present in current number
+                decimalPresent = true;
+                
+            } 
+            else if(symbols.includes(e.target.innerText))
+            {
+                //if a symbol is inserted, it means end of current of current number, and later a new number maybe added, hence make decimalPresent = false here:
+                decimalPresent = false;
+            }       
         }
 
         //update primary display to show input string
@@ -74,6 +95,8 @@ clearButton.addEventListener("click", function(){
 
     //clear secondary display:
     secondaryText.innerText="";
+
+    decimalPresent = false;
 })
 
 //event listener to delete button:
@@ -83,5 +106,11 @@ deleteButton.addEventListener("click", function(){
 
     //update the primary display:
     primaryText.innerText=string
+
+    //if the deleted character was a decimal (.), make decimalPresent =false to allow adding another decimal if needed
+    if(string.slice(string.length-1, string.length)==".")
+    {
+        decimalPresent = false;
+    }
 })
 //--------------------------------------------
