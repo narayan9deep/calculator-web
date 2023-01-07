@@ -1,7 +1,6 @@
 # Calculator
 
 A simple and easy-to-use calculator created using HTML, CSS and Javascript. <br>
-This project is part of [Foundations Course of Odin Project](https://www.theodinproject.com/paths/foundations/courses/foundations). You can view the entire project statement [here](https://www.theodinproject.com/lessons/foundations-calculator).
 
 View Live - https://calculator-narayan9deep.netlify.app/
 
